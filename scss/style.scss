@@ -1,4 +1,8 @@
 
+@import "btnConfig";
+@import "config";
+@import "utilities";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,17 +21,77 @@ img {
 
 a {
   text-decoration: none;
+  color: white;
 }
 
+
+
+// Helper funcs
+@mixin flex-parent() {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@mixin flex-child($width: 50%, $height: auto) {
+  width: $width;
+  display: inline-block;
+  height: $height;
+  @content;
+}
+
+
+
 .hero {
-  // This is where the bulk of the SCSS styling needs to be done
 
-  // Take a look at the other files we've built already. How can they be useful here?
+  color: white;
+  background-color: $primary-color;
 
-  // Also, take time to review the features of SCSS we've already covered:
-  // 1. $variables
-  // 2. nesting (dont forget about the ampersand (&) parent selector!)
-  // 3. At-Rules
+  nav {
+    @include flex-parent();
+
+    ul {
+      @include flex-child(55%) {
+        list-style: none;
+
+        li {
+          display: inline;
+          padding: .75em;
+          font-size: 1em;
+        }
+      }
+    }
+
+    h1 {
+      @include flex-child(35%) {
+        font-size: 1.25em;
+      }
+    }
+  }
+
+
+  .hero-content {
+
+    margin: 1em 0;
+
+    @include flex-parent();
+
+    img {
+      @include flex-child(45%)
+    }
+
+    div {
+      @include flex-child(45%) {
+        h1 {
+          font-size: 2.5em;
+        }
+      }
+    }
+
+  }
+  
 }
 
 // This code is related to some of the aspects of SCSS we have yet to cover.
